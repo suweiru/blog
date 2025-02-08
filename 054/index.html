@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>openwrt系统设置ipv6教程 | 苏苇如</title>
+<link rel="shortcut icon" href="http://bk.suweiru.com/favicon.ico">
+<link href="http://bk.suweiru.com/styles/main.css?v=1739026495578" rel="stylesheet">
+<link href="//at.alicdn.com/t/font_1678829_1mxi55l93a3.css" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="苏苇如 » Feed"
+  href="http://bk.suweiru.com/atom.xml">
+
+
+
+  <meta name="description" content="文/苏苇如
+openwrt的ipv6设置一直是一个难题，最近恰好弄好了openwrt的ipv6，所以记录下来留给后来人参考。
+环境：移动宽带，光猫桥接，路由器拨号。
+设置如下：
+1.网络-接口
+只保留lan和wan接口，其它全部删除。不需要..." />
+  <meta name="keywords" content="" />
+</head>
+
+<body>
+  <div class="main animated">
+    <div class="header animated fadeInDown">
+  <div class="site_title_container">
+    <div class="site_title">
+      <a href="http://bk.suweiru.com">
+        苏苇如
+      </a>
+    </div>
+  </div>
+  <div class="my_socials">
+    
+    
+    <a href="https://www.zhihu.com/people/su-wei-ru-79" target="_blank">
+      <i class="iconfont icon-github"></i></a>
+    
+          
+    
+    <a href="https://space.bilibili.com/37007477" target="_blank">
+      <i class="iconfont icon-twitter"></i></a>
+    
+          
+    
+    <a href="https://weibo.com/6522616970" target="_blank">
+      <i class="iconfont icon-weibo"></i></a>
+    
+          
+    
+          
+    
+          
+    <a href="http://bk.suweiru.com/atom.xml" target="_blank">
+      <i class="iconfont icon-rss"></i></a>
+  </div>
+</div>
+
+<div class="header_menu">
+  
+  
+  <a href="/" class="menu">首页</a>
+  
+
+  
+  <a href="/archives" class="menu">目录</a>
+  
+
+  
+  <a href="/about" class="menu">关于</a>
+  
+
+  <div class="gridea-search-div">
+    <form id="gridea-search-form" data-update="1739026495578" action="/search/">
+      <input class="gridea-search-input" autocomplete="off" spellcheck="false" name="q" />
+    </form>
+  </div>
+</div>
+
+    <div class="autopagerize_page_element">
+      <div class="content">
+        <div class="post_page">
+          <div class="post animated fadeInDown">
+            <div class="post_title post_detail_title">
+              <h2>
+                <a>
+                  openwrt系统设置ipv6教程</a>
+              </h2>
+              <span class="article-info">2025-02-08，461字数
+
+            </div>
+            <div class="post_content markdown">
+              <p class="md_block">
+                <span class="md_line md_line_start md_line_end">
+                  <p>文/苏苇如<br>
+openwrt的ipv6设置一直是一个难题，最近恰好弄好了openwrt的ipv6，所以记录下来留给后来人参考。<br>
+环境：移动宽带，光猫桥接，路由器拨号。<br>
+设置如下：<br>
+1.网络-接口<br>
+只保留lan和wan接口，其它全部删除。不需要像其他教程那样设置wan6什么的。<br>
+2.lan 常规设置<br>
+委托 IPv6 前缀 勾选<br>
+IPv6 分配长度 60（如果60不行，那就自己试试别的或者禁用，反正我这的移动需要用60）<br>
+<img src="tuchuang.suweiru.com/photo/202502082236079.png" alt="" loading="lazy"></p>
+<p>3.lan DHCP服务器 IPV6设置<br>
+指定的主接口 不勾选<br>
+RA 服务  服务器模式<br>
+DHCPv6 服务  服务器模式<br>
+本地 IPV6 DNS 服务器  勾选<br>
+NDP 代理  已禁用<br>
+<img src="tuchuang.suweiru.com/photo/202502082238009.png" alt="" loading="lazy"></p>
+<p>4.lan IPv6  DHCP服务器   RA 设置<br>
+默认路由器 自动<br>
+启用 SLAAC  勾选<br>
+RA 标记  其他配置<br>
+<img src="tuchuang.suweiru.com/photo/202502082240363.png" alt="" loading="lazy"></p>
+<p>5.wan 高级设置<br>
+获取 IPv6 地址  自动<br>
+IPv6 源路由  勾选<br>
+委托 IPv6 前缀  勾选<br>
+IPv6 分配长度    64（如果64不行，那就自己试试别的或者禁用，反正我这的移动需要用64）<br>
+<img src="tuchuang.suweiru.com/photo/202502082242519.png" alt="" loading="lazy"></p>
+<p>6.wan DHCP服务器 ipv6设置<br>
+指定的主接口 不勾选<br>
+其他的全部禁用<br>
+<img src="tuchuang.suweiru.com/photo/202502082243710.png" alt="" loading="lazy"></p>
+<p>注意事项：<br>
+1.网络-DHCP/DNS选项中，过滤IPV6不能勾选，否则测试无法通过。<br>
+<img src="tuchuang.suweiru.com/photo/202502082244258.png" alt="" loading="lazy"><br>
+2.如果有开VPN等网络代理软件，记得检查是否有IPV6过滤等功能，要关掉。最简单的方法就是测试IPV6之前把代理软件全部关闭。</p>
+<p>最终效果：<br>
+IPV6测试全部通过，BT下载也是全通。测试完成以后，建议把ipv6保留，但是把ipv6的dns解析关掉。因为打开ipv6能大幅提高下载速度，但是ipv6会影响很多网站的打开速度。而关闭ipv6的dns解析就可以两者兼得了。<br>
+<img src="tuchuang.suweiru.com/photo/202502082248708.png" alt="" loading="lazy"></p>
+<br />
+                  
+                  <span class="copyright"><center>文章首发于公众号：苏苇如</center><br><center><img src="https://swr123.s3.bitiful.net/photo/gzh.jpg" style="zoom:70%;" /></center>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = '//swr123.s3.bitiful.net/push_1.js';
+    }
+    else {
+        bp.src = '//swr123.s3.bitiful.net/push_2.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+</span>
+
+                </span>
+                
+              </p>
+            </div>
+            <div class="post_footer">
+              
+              
+                <div class="next-post" style="margin-top: 20px;">
+                  <div class="next">下一篇</div>
+                  <a href="http://bk.suweiru.com/053/">
+                    <h3 class="post-title">
+                      刘邦厉害在哪里？
+                    </h3>
+                  </a>
+                </div>
+                
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    
+    <div class="powered_by">
+        <a href="https://beian.miit.gov.cn/#/Integrated/recordQuery" target="_blank">备案号：鄂ICP备20013492号</a>
+    </div>
+    <div class="footer_slogan">
+        联系我可以到公众号：苏苇如
+    </div>
+    <div id="back_to_top" class="back_to_top">
+        <span>△</span>
+    </div>
+    
+</div>
+
+<script src="http://bk.suweiru.com/media/scripts/util.js"></script>
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script>
+
+<script charset="UTF-8" id="LA_COLLECT" src="https://sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3F9kUCnjGILuCCVP",ck:"3F9kUCnjGILuCCVP"})</script>
+
+  <link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js">
+  <script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+    <link rel="prefetch" href="http://bk.suweiru.com/053/">
+
+
+</body>
+
+</html>
